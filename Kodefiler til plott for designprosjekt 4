@@ -1,3 +1,5 @@
+Koden under er stort sett egentilpasset kode fra "How to elsys" skrevet av Sivertsen og Bjørnevik, der jeg kun har tilpasset koden for mine formål. Dette kan man vel si om all skrevet kode, men nevner dette ettersom dokumentet var til stor hjelp.
+
 Kode for figur 2:
 
 import matplotlib.pyplot as plt
