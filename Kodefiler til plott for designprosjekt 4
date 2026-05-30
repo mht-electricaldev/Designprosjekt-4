@@ -1,0 +1,322 @@
+Kode for figur 2:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+def sin_f(x):
+    return np.sin(x)
+
+def sin_2f(x):
+    return 0.5*np.sin(2*x)
+
+xVerdier = np.linspace(0,6*np.pi,1000)
+y1Verdier = sin_f(xVerdier)
+y2Verdier = sin_2f(xVerdier)
+
+plt.plot(xVerdier,y1Verdier, label='$x_1(t)$', color = "C1")
+plt.plot(xVerdier,y2Verdier, label='$\widehat{x_2}(t)$', color = "C0")
+plt.title("Oscilloskop over $x_1(t)$ og $\widehat{x_2}(t)$", fontsize=16)
+plt.xlabel("Tid(s)", fontsize=14)
+plt.ylabel("Spenning(V)", fontsize=14)
+plt.legend(borderpad = 1.3, fontsize=14)
+plt.savefig('problembeskrivelse.png')
+
+Kode for figur 4:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+x_i = np.linspace(-0.0003,0.00015,2000)
+
+def sin_f(x):
+    return 5*np.sin(2*np.pi*3525*x)
+
+def ulineærOppførsel(x):
+    y_verdier = []
+    baseLine = sin_f(x)
+    for i in baseLine:
+        if i >= 0.7:
+            y_verdier.append(i - 0.7)
+        else:
+            y_verdier.append(0)
+    return y_verdier
+
+xVerdier = x_i
+y1Verdier = sin_f(xVerdier)
+ulineærVerdi = ulineærOppførsel(xVerdier)
+
+m = 10**6
+xVerdier = [i * m for i in xVerdier]
+    
+plt.plot(xVerdier,y1Verdier, label='$x_1(t)$')
+plt.plot(xVerdier,ulineærVerdi, label='y(t)')
+plt.title("Eksempel på oppførsel til signalet over $x_1(t)$ og $y(t)$", fontsize=16)
+plt.xlabel("Tid($\mu$s)", fontsize=14)
+plt.ylabel("Spenning(V)", fontsize=14)
+plt.legend()
+plt.savefig('Ulineært system oppførsel')
+
+Kode for figur 8:
+
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
+header = []
+data = []
+filename = 'NonLinearScope.csv'
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile)
+    header = next(csvreader)
+    for datapoint in csvreader:
+        values = [float(value) for value in datapoint]
+        data.append(values)
+time = [(p[0]) for p in data]
+ch1 = [(p[1]) for p in data]
+ch2 = [(p[2]) for p in data]
+
+m = 10**6
+time = [i * m for i in time]
+
+print("ch2 max: ",np.max(ch2))
+
+plt.plot(time, ch1, label= "$x_1$(t)")
+plt.plot(time, ch2, label= "$y(t)$")
+plt.title("Oscilloskop av $x_1$(t) og y(t)")
+plt.xlabel("tid $\mu$s")
+plt.legend(loc= 'upper right')
+plt.ylabel("Spenning [V]")
+plt.yticks([-1, -0.5, -0.15, 0, 0.15, 0.5, 1])
+plt.grid(True)
+plt.savefig('UlineartSystemRealisertScope')
+
+Kode for figur 9:
+
+import numpy as np
+#Plotting
+import matplotlib.pyplot as plt
+#Lese CSV
+import csv
+header = []
+data = []
+filename = 'spektrumsanalyse x1 og y 3.525Hz.csv'
+#Henter data fra csvfil
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile)
+#Leser første linje i csv-fila (den med navn til kanalene)
+    header = next(csvreader)
+    for datapoint in csvreader:
+        values = [float(value) for value in datapoint]
+        data.append(values)
+#Legger inn data fra hver kanal i hver sin liste
+time = [(p[0]) for p in data]
+ch1 = [(p[1]) for p in data]
+ch2 = [(p[3]) for p in data]
+
+plt.plot(time, ch1, label= "$x_1(t)$")
+plt.plot(time, ch2, label= "$y(t)$")
+plt.title("Spektrumsanalyse av $x_1(t)$ og $y(t)$")
+plt.xlabel("Frekvenser [Hz]")
+plt.legend(loc= 'upper right')
+plt.ylabel("RMS [V]")
+plt.xticks([0, 3525, 7050, 10575, 14100, 17625])
+plt.savefig("Spektrumsanalyse av y(t) og x_1 (t)")
+
+Kode for figur 10:
+
+Samme som figur 9, men kun plottet for ch2
+
+Kode for figur 13:
+
+import numpy as np
+#Plotting
+import matplotlib.pyplot as plt
+#Lese CSV
+import csv
+header = []
+data = []
+filename = 'spektrumsanalyse x1 og x2 short range.csv'
+#Henter data fra csvfil
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile)
+#Leser første linje i csv-fila (den med navn til kanalene)
+    header = next(csvreader)
+    for datapoint in csvreader:
+        values = [float(value) for value in datapoint]
+        data.append(values)
+#Legger inn data fra hver kanal i hver sin liste
+time = [(p[0]) for p in data]
+ch1 = [(p[1]) for p in data]
+ch2 = [(p[2]) for p in data]
+
+print(np.max(ch2)) #-12.52012, vi må finne intervallet ch er mindre enn -15.52012
+
+båndbreddeverdier = []
+for i in range(len(ch2)):
+    if ch2[i] >= -15.52012444853557:
+        båndbreddeverdier.append(time[i])
+
+båndbredde = båndbreddeverdier[-1] - båndbreddeverdier[0]
+print(båndbreddeverdier[0], båndbreddeverdier[-1])
+print(båndbreddeverdier[-1] - båndbreddeverdier[0])
+
+#plt.plot(time, ch1, label= "$x_1(t)$")
+plt.plot(time, ch2, label= "$\widehat{x_2}(t)$")
+plt.title("Nettverksanalyse nærbilde av $\widehat{x_2}(t)$")
+plt.xlabel("Frekvenser [Hz]")
+plt.legend(loc= 'upper right')
+plt.ylabel("Amplitude [dB]")
+plt.grid(True)
+plt.xticks([6500, båndbreddeverdier[0], 7050, båndbreddeverdier[-1], 7500], ["6500", "$f_{L}$", "7050", "$f_{H}$", "7500"], fontsize=15)
+plt.xlim(6500,7500)
+plt.annotate("6942.4 Hz", (6942.38648, -15.5201244))
+plt.annotate("7139.2 Hz", (7139.181, -15.5201244))
+plt.savefig("Nettverksanalyse nærbilde")
+
+Kode for figur 14:
+
+import numpy as np
+#Plotting
+import matplotlib.pyplot as plt
+#Lese CSV
+import csv
+header = []
+data = []
+filename = 'spektrumsanalyse x1 og x2 long range.csv'
+#Henter data fra csvfil
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile)
+#Leser første linje i csv-fila (den med navn til kanalene)
+    header = next(csvreader)
+    for datapoint in csvreader:
+        values = [float(value) for value in datapoint]
+        data.append(values)
+#Legger inn data fra hver kanal i hver sin liste
+time = [(p[0]) for p in data]
+ch1 = [(p[1]) for p in data]
+ch2 = [(p[2]) for p in data]
+
+#plt.plot(time, ch1, label= "x1")
+plt.plot(time, ch2, label= "$\widehat{x_2}(t)$")
+plt.title("Nettverksanalyse av $\widehat{x_2}(t)$")
+plt.xlabel("Frekvenser [Hz]")
+plt.legend(loc= 'upper right')
+plt.ylabel("Amplitude [dB]")
+plt.xticks([3525,7050,10575, 14100])
+plt.grid(True)
+plt.xlim(1000,14100)
+plt.savefig("Nærbilde nettverksanalyse")
+
+# #To plots (ch1 og ch2) i en figur
+# #(fig), plt.subplots(rader,kolonner)
+# fig, (chanel1, chanel2) = plt.subplots(1,2)
+# #Plot ch1
+# chanel1.plot(time,ch1)
+# chanel1.plot(time, ch2)
+# #Plot ch1
+# chanel2.plot(time,ch2)
+# plt.show()
+
+Kode for figur 17:
+
+import numpy as np
+#Plotting
+import matplotlib.pyplot as plt
+#Lese CSV
+import csv
+header = []
+data = []
+filename = 'SPECTRUM x1 x2 final.csv'
+#Henter data fra csvfil
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile)
+#Leser første linje i csv-fila (den med navn til kanalene)
+    header = next(csvreader)
+    for datapoint in csvreader:
+        values = [float(value) for value in datapoint]
+        data.append(values)
+#Legger inn data fra hver kanal i hver sin liste
+time = [(p[0]) for p in data]
+ch1 = [(p[1]) for p in data]
+ch2 = [(p[3]) for p in data]
+
+plt.plot(time, ch1, label= "$x_1(t)$", color="C1")
+plt.plot(time, ch2, label= "$\widehat{x_2}(t)$", color= "C0")
+plt.title("Spektrumsanalyse av $x_1(t)$ og $\widehat{x_2}(t)$")
+plt.xlabel("Frekvenser [Hz]")
+plt.legend(loc= 'upper right')
+plt.ylabel("RMS [V]")
+plt.xticks([0, 3525, 7050, 10575, 14100, 17625])
+plt.show()
+
+Kode for figur 18:
+import numpy as np
+#Plotting
+import matplotlib.pyplot as plt
+#Lese CSV
+import csv
+header = []
+data = []
+filename = 'SPECTRUM x1 x2 final.csv'
+#Henter data fra csvfil
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile)
+#Leser første linje i csv-fila (den med navn til kanalene)
+    header = next(csvreader)
+    for datapoint in csvreader:
+        values = [float(value) for value in datapoint]
+        data.append(values)
+#Legger inn data fra hver kanal i hver sin liste
+time = [(p[0]) for p in data]
+ch1 = [(p[1]) for p in data]
+ch2 = [(p[3]) for p in data]
+
+# plt.plot(time, ch1, label= "$x_1(t)$", color="C1")
+plt.plot(time, ch2, label= "$\widehat{x_2}(t)$", color= "C0")
+plt.title("Spektrumsanalyse av $x_1(t)$ og $\widehat{x_2}(t)$")
+plt.xlabel("Frekvenser [Hz]")
+plt.legend(loc= 'upper right')
+plt.ylabel("RMS [V]")
+plt.xticks([0, 3525, 7050, 10575, 14100, 17625])
+plt.show()
+
+kode for figur 19:
+
+import numpy as np
+#Plotting
+import matplotlib.pyplot as plt
+#Lese CSV
+import csv
+header = []
+data = []
+filename = 'SCOPE x1 og x2 final.csv'
+#Henter data fra csvfil
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile)
+#Leser første linje i csv-fila (den med navn til kanalene)
+    header = next(csvreader)
+    for datapoint in csvreader:
+        values = [float(value) for value in datapoint]
+        data.append(values)
+#Legger inn data fra hver kanal i hver sin liste
+time = [(p[0]) for p in data]
+ch1 = [(p[1]) for p in data]
+ch2 = [(p[2]) for p in data]
+
+m = 10**6
+time = [i * m for i in time]
+
+print("ch2 max: ",np.max(ch2))
+
+# def periodEstimation():
+#     for i in range(ch2):
+plt.plot(time, ch1, label= "$x_1(t)$")
+plt.plot(time, ch2, label= "$\widehat{x_2}(t)$")
+plt.title("Sammenligning av signalet til $x_1(t)$ og $\widehat{x_2}(t)$")
+plt.xlabel("tid $\mu$s")
+plt.legend(loc= 'upper right')
+plt.ylabel("Spenning [V]")
+plt.yticks([-1, -0.5, -0.15, 0, 0.15, 0.5, 1])
+plt.grid(True)
+plt.savefig("Sammenligning av signalet til $x_1$ og $x_2$")
+
+
