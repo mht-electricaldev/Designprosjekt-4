@@ -87,7 +87,7 @@ plt.title("Oscilloskop av $x_1$(t) og y(t)")
 plt.xlabel("tid $\mu$s")
 plt.legend(loc= 'upper right')
 plt.ylabel("Spenning [V]")
-plt.yticks([-1, -0.5, -0.15, 0, 0.15, 0.5, 1])
+plt.yticks([-1, -0.5, 0, 0.5, 1])
 plt.grid(True)
 plt.savefig('UlineartSystemRealisertScope')
 
