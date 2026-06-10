@@ -94,22 +94,17 @@ plt.savefig('UlineartSystemRealisertScope')
 Kode for figur 9:
 
 import numpy as np
-#Plotting
 import matplotlib.pyplot as plt
-#Lese CSV
 import csv
 header = []
 data = []
 filename = 'spektrumsanalyse x1 og y 3.525Hz.csv'
-#Henter data fra csvfil
 with open(filename) as csvfile:
     csvreader = csv.reader(csvfile)
-#Leser første linje i csv-fila (den med navn til kanalene)
     header = next(csvreader)
     for datapoint in csvreader:
         values = [float(value) for value in datapoint]
         data.append(values)
-#Legger inn data fra hver kanal i hver sin liste
 time = [(p[0]) for p in data]
 ch1 = [(p[1]) for p in data]
 ch2 = [(p[3]) for p in data]
@@ -130,22 +125,17 @@ Samme som figur 9, men kun plottet for ch2
 Kode for figur 13:
 
 import numpy as np
-#Plotting
 import matplotlib.pyplot as plt
-#Lese CSV
 import csv
 header = []
 data = []
 filename = 'spektrumsanalyse x1 og x2 short range.csv'
-#Henter data fra csvfil
 with open(filename) as csvfile:
     csvreader = csv.reader(csvfile)
-#Leser første linje i csv-fila (den med navn til kanalene)
     header = next(csvreader)
     for datapoint in csvreader:
         values = [float(value) for value in datapoint]
         data.append(values)
-#Legger inn data fra hver kanal i hver sin liste
 time = [(p[0]) for p in data]
 ch1 = [(p[1]) for p in data]
 ch2 = [(p[2]) for p in data]
@@ -177,22 +167,17 @@ plt.savefig("Nettverksanalyse nærbilde")
 Kode for figur 14:
 
 import numpy as np
-#Plotting
 import matplotlib.pyplot as plt
-#Lese CSV
 import csv
 header = []
 data = []
 filename = 'spektrumsanalyse x1 og x2 long range.csv'
-#Henter data fra csvfil
 with open(filename) as csvfile:
     csvreader = csv.reader(csvfile)
-#Leser første linje i csv-fila (den med navn til kanalene)
     header = next(csvreader)
     for datapoint in csvreader:
         values = [float(value) for value in datapoint]
         data.append(values)
-#Legger inn data fra hver kanal i hver sin liste
 time = [(p[0]) for p in data]
 ch1 = [(p[1]) for p in data]
 ch2 = [(p[2]) for p in data]
@@ -221,22 +206,17 @@ plt.savefig("Nærbilde nettverksanalyse")
 Kode for figur 17:
 
 import numpy as np
-#Plotting
 import matplotlib.pyplot as plt
-#Lese CSV
 import csv
 header = []
 data = []
 filename = 'SPECTRUM x1 x2 final.csv'
-#Henter data fra csvfil
 with open(filename) as csvfile:
     csvreader = csv.reader(csvfile)
-#Leser første linje i csv-fila (den med navn til kanalene)
     header = next(csvreader)
     for datapoint in csvreader:
         values = [float(value) for value in datapoint]
         data.append(values)
-#Legger inn data fra hver kanal i hver sin liste
 time = [(p[0]) for p in data]
 ch1 = [(p[1]) for p in data]
 ch2 = [(p[3]) for p in data]
@@ -252,22 +232,17 @@ plt.show()
 
 Kode for figur 18:
 import numpy as np
-#Plotting
 import matplotlib.pyplot as plt
-#Lese CSV
 import csv
 header = []
 data = []
 filename = 'SPECTRUM x1 x2 final.csv'
-#Henter data fra csvfil
 with open(filename) as csvfile:
     csvreader = csv.reader(csvfile)
-#Leser første linje i csv-fila (den med navn til kanalene)
     header = next(csvreader)
     for datapoint in csvreader:
         values = [float(value) for value in datapoint]
         data.append(values)
-#Legger inn data fra hver kanal i hver sin liste
 time = [(p[0]) for p in data]
 ch1 = [(p[1]) for p in data]
 ch2 = [(p[3]) for p in data]
@@ -284,22 +259,17 @@ plt.show()
 kode for figur 19:
 
 import numpy as np
-#Plotting
 import matplotlib.pyplot as plt
-#Lese CSV
 import csv
 header = []
 data = []
 filename = 'SCOPE x1 og x2 final.csv'
-#Henter data fra csvfil
 with open(filename) as csvfile:
     csvreader = csv.reader(csvfile)
-#Leser første linje i csv-fila (den med navn til kanalene)
     header = next(csvreader)
     for datapoint in csvreader:
         values = [float(value) for value in datapoint]
         data.append(values)
-#Legger inn data fra hver kanal i hver sin liste
 time = [(p[0]) for p in data]
 ch1 = [(p[1]) for p in data]
 ch2 = [(p[2]) for p in data]
